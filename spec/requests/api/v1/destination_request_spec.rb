@@ -2,33 +2,36 @@ require 'rails_helper'
 
 describe "Openweather, Mapquest, Bored API" do
   context "Happy Path" do
-    it "retrieves current forecast from city-state", :vcr do
+    it "retrieves city and current forecast from destination", :vcr do
       city_state = "Houston, TX"
-      get "/api/v1/forecast?location=#{city_state}"
-      # get "/api/v1/forecast?location=denver,co"
+      get "/api/v1/activities?destination=#{city_state}"
 
       expect(response).to be_successful
 
       formatted = JSON.parse(response.body, symbolize_names: true)
-      # binding.pry
+      binding.pry
       expect(formatted).to be_a(Hash)
-      expect(formatted[:data].count).to eq(3)
+
+      expect(formatted).to have_key(:data)
       expect(formatted[:data]).to be_a(Hash)
+      expect(formatted[:data].count).to eq(3)
 
       expect(formatted[:data]).to have_key(:id)
       expect(formatted[:data][:id]).to eq(nil)
 
       expect(formatted[:data]).to have_key(:type)
-      expect(formatted[:data][:type]).to eq("forecast")
+      expect(formatted[:data][:type]).to eq("today")
 
       expect(formatted[:data]).to have_key(:attributes)
       expect(formatted[:data][:attributes]).to be_a(Hash)
 
-      expect(formatted[:data][:attributes]).to have_key(:id)
-      expect(formatted[:data][:attributes][:id]).to eq(nil)
+      inner = formatted[:data][:attributes]
 
-      expect(formatted[:data][:attributes]).to have_key(:type)
-      expect(formatted[:data][:attributes][:type]).to eq("forecast")
+      expect(inner).to have_key(:id)
+      expect(inner[:id]).to eq(nil)
+
+      expect(inner).to have_key(:city)
+      expect(inner[:city]).to eq("Chicago")
 
       expect(formatted[:data][:attributes]).to have_key(:current_weather)
       expect(formatted[:data][:attributes][:current_weather]).to be_an(Hash)

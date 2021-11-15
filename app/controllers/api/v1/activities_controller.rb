@@ -1,12 +1,14 @@
 class Api::V1::ActivitiesController < ApplicationController
   def index
-    if params[:location]
-      mapped = MapquestFacade.get_long_lat(params[:location])
+    # if params[:destination]
+      # acts = ActivityFacade.get_fun(params[:destination])
+      mapped = MapquestFacade.get_long_lat(params[:destination])
       forecast = WeatherFacade.get_forecast(mapped.lat, mapped.long)
-      render json: ForecastSerializer.new(forecast)
-    else
-      # render json: {status: :not_found, code: 404, message: "Invalid Input" }, status: :not_found
-      render json: {errors: ["Invalid Input"]}, status: 404
-    end
+      # render json: mapped.city
+      render json: TodaySerializer.new(forecast)
+      # render json: ForecastSerializer.new(forecast)
+    # else
+    #   render json: {errors: ["Invalid Input"]}, status: 404
+    # end
   end
 end
