@@ -54,7 +54,7 @@ describe "Openweather and Mapquest API" do
       expect(now[:humidity]).to be_an(Integer)
 
       expect(now).to have_key(:uvi)
-      expect(now[:uvi]).to be_an(Integer)
+      expect(now[:uvi]).to be_an(Float)
 
       expect(now).to have_key(:visibility)
       expect(now[:visibility]).to be_an(Integer)
