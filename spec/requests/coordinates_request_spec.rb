@@ -2,14 +2,13 @@ require 'rails_helper'
 
 describe "Mapquest API" do
   it "retrieves coordinates from city-state" do
-    city_state = "denver,co"
+    city_state = "Houston, TX"
     get "/api/v1/forecast?location=#{city_state}"
     # get "/api/v1/forecast?location=denver,co"
 
     expect(response).to be_successful
 
     location = JSON.parse(response.body, symbolize_names: true)
-    # binding.pry
 
     expect(location).to be_a(Hash)
     expect(location[:data].count).to eq(3)
@@ -35,6 +34,5 @@ describe "Mapquest API" do
 
     expect(location[:data][:attributes]).to have_key(:state)
     expect(location[:data][:attributes][:state]).to be_an(String)
-
   end
 end
