@@ -28,8 +28,8 @@ class Forecast
     input.map do |day|
       {
         "time" => Time.at(day[:dt]),
-        "sunrise" => day[:sunrise],
-        "sunset" => day[:sunset],
+        "sunrise" => Time.at(day[:sunrise]),
+        "sunset" => Time.at(day[:sunset]),
         "max_temp" => day[:temp][:max],
         "min_temp" => day[:temp][:max],
         "conditions" => day[:weather].first[:description],

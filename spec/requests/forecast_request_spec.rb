@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "Openweather and Mapquest API" do
-  it "retrieves current forecast from city-state" do
+  it "retrieves current forecast from city-state", :vcr do
     city_state = "Houston, TX"
     get "/api/v1/forecast?location=#{city_state}"
     # get "/api/v1/forecast?location=denver,co"
@@ -72,7 +72,7 @@ describe "Openweather and Mapquest API" do
     expect(now).not_to have_key(:wind_gust)
   end
 
-  it "retrieves daily forecasts from city-state" do
+  it "retrieves daily forecasts from city-state", :vcr do
     city_state = "Houston, TX"
     get "/api/v1/forecast?location=#{city_state}"
 
@@ -100,16 +100,16 @@ describe "Openweather and Mapquest API" do
     expect(formatted[:data][:attributes][:type]).to eq("forecast")
 
     expect(formatted[:data][:attributes]).to have_key(:daily_weather)
-    expect(formatted[:data][:attributes][:daily_weather]).to be_an(Hash)
+    expect(formatted[:data][:attributes][:daily_weather]).to be_an(Array)
 
     days = formatted[:data][:attributes][:daily_weather]
 
     expect(days).to be_a(Array)
     expect(days.count).to eq(5)
-    expect(days).first.to be_a(Hash)
+    expect(days.first).to be_a(Hash)
 
-    expect(days.first).to have_key(:date)
-    expect(days.first[:date]).to be_an(String)
+    expect(days.first).to have_key(:time)
+    expect(days.first[:time]).to be_an(String)
 
     expect(days.first).to have_key(:sunrise)
     expect(days.first[:sunrise]).to be_an(String)
@@ -145,7 +145,7 @@ describe "Openweather and Mapquest API" do
     expect(days.first).not_to have_key(:uvi)
   end
 
-  it "retrieves hourly forecasts from city-state" do
+  it "retrieves hourly forecasts from city-state", :vcr do
     city_state = "Houston, TX"
     get "/api/v1/forecast?location=#{city_state}"
 

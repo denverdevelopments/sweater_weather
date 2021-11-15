@@ -1,0 +1,156 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://www.mapquestapi.com/geocoding/v1/address?key=eyaDL7GwbdgiqnXF3jwq5v8Axp0NOg8j&location=Houston,%20TX
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.8.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Date:
+      - Mon, 15 Nov 2021 10:17:34 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Content-Length:
+      - '1031'
+      Access-Control-Allow-Methods:
+      - OPTIONS,GET,POST
+      Access-Control-Allow-Origin:
+      - "*"
+      Cache-Control:
+      - no-cache, must-revalidate
+      Expires:
+      - Mon, 20 Dec 1998 01:00:00 GMT
+      Geocodetransactioncount:
+      - '1'
+      Last-Modified:
+      - Mon, 15 Nov 2021 10:17:34 GMT
+      Pragma:
+      - no-cache
+      Reversegeocodetransactioncount:
+      - '0'
+      Set-Cookie:
+      - JSESSIONID=02E1A91484B80EA4884AEC5A16DA718C; Path=/; HttpOnly; Secure
+      Status:
+      - success
+      Transactionweight:
+      - '1.0'
+      Strict-Transport-Security:
+      - max-age=0
+    body:
+      encoding: UTF-8
+      string: '{"info":{"statuscode":0,"copyright":{"text":"\u00A9 2021 MapQuest,
+        Inc.","imageUrl":"http://api.mqcdn.com/res/mqlogo.gif","imageAltText":"\u00A9
+        2021 MapQuest, Inc."},"messages":[]},"options":{"maxResults":-1,"thumbMaps":true,"ignoreLatLngInput":false},"results":[{"providedLocation":{"location":"Houston,
+        TX"},"locations":[{"street":"","adminArea6":"","adminArea6Type":"Neighborhood","adminArea5":"Houston","adminArea5Type":"City","adminArea4":"Harris
+        County","adminArea4Type":"County","adminArea3":"TX","adminArea3Type":"State","adminArea1":"US","adminArea1Type":"Country","postalCode":"","geocodeQualityCode":"A5XAX","geocodeQuality":"CITY","dragPoint":false,"sideOfStreet":"N","linkId":"282040105","unknownInput":"","type":"s","latLng":{"lat":29.760803,"lng":-95.369506},"displayLatLng":{"lat":29.760803,"lng":-95.369506},"mapUrl":"http://www.mapquestapi.com/staticmap/v5/map?key=eyaDL7GwbdgiqnXF3jwq5v8Axp0NOg8j&type=map&size=225,160&locations=29.760803,-95.369506|marker-sm-50318A-1&scalebar=true&zoom=12&rand=671173324"}]}]}'
+  recorded_at: Mon, 15 Nov 2021 10:17:34 GMT
+- request:
+    method: get
+    uri: https://api.openweathermap.org/data/2.5/onecall?appid=<DONT_SHARE_MY_OPENWEATHER_KEY>&exclude=minutely,alerts&lat=29.760803&lon=-95.369506&units=imperial
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.8.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - openresty
+      Date:
+      - Mon, 15 Nov 2021 10:17:34 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '17427'
+      Connection:
+      - keep-alive
+      X-Cache-Key:
+      - "/data/2.5/onecall?exclude=minutely%2Calerts&lat=29.76&lon=-95.37&units=imperial"
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST
+    body:
+      encoding: UTF-8
+      string: '{"lat":29.7608,"lon":-95.3695,"timezone":"America/Chicago","timezone_offset":-21600,"current":{"dt":1636971411,"sunrise":1636980391,"sunset":1637018759,"temp":59.23,"feels_like":58.89,"pressure":1020,"humidity":86,"dew_point":55.06,"uvi":0,"clouds":1,"visibility":10000,"wind_speed":1.01,"wind_deg":186,"wind_gust":1.99,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}]},"hourly":[{"dt":1636970400,"temp":59.23,"feels_like":58.89,"pressure":1020,"humidity":86,"dew_point":55.06,"uvi":0,"clouds":1,"visibility":10000,"wind_speed":3.65,"wind_deg":199,"wind_gust":9.89,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1636974000,"temp":60.03,"feels_like":59.81,"pressure":1020,"humidity":87,"dew_point":56.16,"uvi":0,"clouds":1,"visibility":10000,"wind_speed":3.51,"wind_deg":202,"wind_gust":7.81,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1636977600,"temp":60.76,"feels_like":60.64,"pressure":1020,"humidity":87,"dew_point":56.88,"uvi":0,"clouds":1,"visibility":10000,"wind_speed":3.62,"wind_deg":204,"wind_gust":6.38,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1636981200,"temp":61.52,"feels_like":61.5,"pressure":1021,"humidity":88,"dew_point":57.94,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":4.09,"wind_deg":198,"wind_gust":8.3,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01d"}],"pop":0},{"dt":1636984800,"temp":64.13,"feels_like":64.15,"pressure":1022,"humidity":83,"dew_point":58.87,"uvi":0.25,"clouds":0,"visibility":10000,"wind_speed":4.25,"wind_deg":203,"wind_gust":9.89,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01d"}],"pop":0},{"dt":1636988400,"temp":69.08,"feels_like":69.21,"pressure":1023,"humidity":75,"dew_point":60.73,"uvi":0.96,"clouds":0,"visibility":10000,"wind_speed":5.46,"wind_deg":204,"wind_gust":10.4,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01d"}],"pop":0},{"dt":1636992000,"temp":72.54,"feels_like":72.68,"pressure":1023,"humidity":68,"dew_point":61.34,"uvi":2.04,"clouds":0,"visibility":10000,"wind_speed":6.38,"wind_deg":203,"wind_gust":11.01,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01d"}],"pop":0},{"dt":1636995600,"temp":75.43,"feels_like":75.6,"pressure":1023,"humidity":62,"dew_point":61.59,"uvi":3.17,"clouds":0,"visibility":10000,"wind_speed":7.31,"wind_deg":204,"wind_gust":10.29,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01d"}],"pop":0},{"dt":1636999200,"temp":77.63,"feels_like":77.83,"pressure":1022,"humidity":58,"dew_point":61.47,"uvi":3.82,"clouds":6,"visibility":10000,"wind_speed":7.05,"wind_deg":208,"wind_gust":9.64,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01d"}],"pop":0},{"dt":1637002800,"temp":78.93,"feels_like":78.93,"pressure":1021,"humidity":53,"dew_point":60.22,"uvi":3.68,"clouds":61,"visibility":10000,"wind_speed":7.67,"wind_deg":206,"wind_gust":10.42,"weather":[{"id":803,"main":"Clouds","description":"broken
+        clouds","icon":"04d"}],"pop":0},{"dt":1637006400,"temp":79.32,"feels_like":79.32,"pressure":1020,"humidity":50,"dew_point":58.96,"uvi":2.86,"clouds":74,"visibility":10000,"wind_speed":7.65,"wind_deg":202,"wind_gust":11.21,"weather":[{"id":803,"main":"Clouds","description":"broken
+        clouds","icon":"04d"}],"pop":0},{"dt":1637010000,"temp":79.59,"feels_like":79.59,"pressure":1019,"humidity":48,"dew_point":58.14,"uvi":1.72,"clouds":68,"visibility":10000,"wind_speed":7.56,"wind_deg":193,"wind_gust":10.67,"weather":[{"id":803,"main":"Clouds","description":"broken
+        clouds","icon":"04d"}],"pop":0},{"dt":1637013600,"temp":78.48,"feels_like":78.48,"pressure":1019,"humidity":52,"dew_point":59.31,"uvi":0.69,"clouds":64,"visibility":10000,"wind_speed":8.75,"wind_deg":180,"wind_gust":11.56,"weather":[{"id":803,"main":"Clouds","description":"broken
+        clouds","icon":"04d"}],"pop":0},{"dt":1637017200,"temp":76.12,"feels_like":76.21,"pressure":1019,"humidity":59,"dew_point":60.76,"uvi":0.15,"clouds":61,"visibility":10000,"wind_speed":9.84,"wind_deg":182,"wind_gust":15.08,"weather":[{"id":803,"main":"Clouds","description":"broken
+        clouds","icon":"04d"}],"pop":0},{"dt":1637020800,"temp":73.2,"feels_like":73.36,"pressure":1020,"humidity":67,"dew_point":61.41,"uvi":0,"clouds":51,"visibility":10000,"wind_speed":9.78,"wind_deg":181,"wind_gust":18.25,"weather":[{"id":803,"main":"Clouds","description":"broken
+        clouds","icon":"04n"}],"pop":0},{"dt":1637024400,"temp":71.42,"feels_like":71.6,"pressure":1020,"humidity":71,"dew_point":61.48,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":9.33,"wind_deg":182,"wind_gust":19.26,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637028000,"temp":70.05,"feels_like":70.23,"pressure":1020,"humidity":74,"dew_point":61.43,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":8.48,"wind_deg":183,"wind_gust":19.19,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637031600,"temp":69.06,"feels_like":69.3,"pressure":1020,"humidity":77,"dew_point":61.36,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":8.21,"wind_deg":183,"wind_gust":19.8,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637035200,"temp":68.27,"feels_like":68.5,"pressure":1020,"humidity":79,"dew_point":61.36,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":7.74,"wind_deg":183,"wind_gust":20.24,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637038800,"temp":67.6,"feels_like":67.87,"pressure":1020,"humidity":81,"dew_point":61.34,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":7.23,"wind_deg":182,"wind_gust":20.58,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637042400,"temp":67.05,"feels_like":67.3,"pressure":1020,"humidity":82,"dew_point":61.21,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":6.87,"wind_deg":181,"wind_gust":20.83,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637046000,"temp":66.6,"feels_like":66.85,"pressure":1020,"humidity":83,"dew_point":61.07,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":6.8,"wind_deg":182,"wind_gust":21.61,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637049600,"temp":66.18,"feels_like":66.4,"pressure":1020,"humidity":83,"dew_point":60.85,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":6.85,"wind_deg":182,"wind_gust":22.26,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637053200,"temp":65.82,"feels_like":66.06,"pressure":1020,"humidity":84,"dew_point":60.6,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":6.82,"wind_deg":181,"wind_gust":22.48,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637056800,"temp":65.39,"feels_like":65.57,"pressure":1019,"humidity":84,"dew_point":60.35,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":5.99,"wind_deg":180,"wind_gust":21.59,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637060400,"temp":64.87,"feels_like":65.05,"pressure":1019,"humidity":85,"dew_point":60.13,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":5.21,"wind_deg":177,"wind_gust":20.15,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637064000,"temp":64.53,"feels_like":64.72,"pressure":1019,"humidity":86,"dew_point":59.99,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":5.39,"wind_deg":173,"wind_gust":19.53,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637067600,"temp":64.42,"feels_like":64.6,"pressure":1020,"humidity":86,"dew_point":59.92,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":5.86,"wind_deg":174,"wind_gust":20.18,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01d"}],"pop":0},{"dt":1637071200,"temp":66.78,"feels_like":66.92,"pressure":1020,"humidity":80,"dew_point":60.26,"uvi":0.24,"clouds":0,"visibility":10000,"wind_speed":6.29,"wind_deg":175,"wind_gust":20.94,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01d"}],"pop":0},{"dt":1637074800,"temp":70.9,"feels_like":70.97,"pressure":1020,"humidity":70,"dew_point":60.73,"uvi":0.93,"clouds":0,"visibility":10000,"wind_speed":9.08,"wind_deg":182,"wind_gust":20.27,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01d"}],"pop":0},{"dt":1637078400,"temp":74.57,"feels_like":74.55,"pressure":1021,"humidity":60,"dew_point":59.77,"uvi":2.01,"clouds":0,"visibility":10000,"wind_speed":11.72,"wind_deg":188,"wind_gust":17.25,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01d"}],"pop":0},{"dt":1637082000,"temp":77.07,"feels_like":76.93,"pressure":1020,"humidity":52,"dew_point":58.15,"uvi":3.13,"clouds":0,"visibility":10000,"wind_speed":11.99,"wind_deg":189,"wind_gust":16.46,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01d"}],"pop":0},{"dt":1637085600,"temp":78.85,"feels_like":78.85,"pressure":1019,"humidity":47,"dew_point":56.97,"uvi":3.77,"clouds":1,"visibility":10000,"wind_speed":12.17,"wind_deg":187,"wind_gust":16.44,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01d"}],"pop":0},{"dt":1637089200,"temp":79.84,"feels_like":79.84,"pressure":1018,"humidity":45,"dew_point":56.41,"uvi":3.69,"clouds":18,"visibility":10000,"wind_speed":12.55,"wind_deg":186,"wind_gust":16.6,"weather":[{"id":801,"main":"Clouds","description":"few
+        clouds","icon":"02d"}],"pop":0},{"dt":1637092800,"temp":80.01,"feels_like":80.28,"pressure":1017,"humidity":44,"dew_point":56.25,"uvi":2.87,"clouds":24,"visibility":10000,"wind_speed":13.13,"wind_deg":185,"wind_gust":16.89,"weather":[{"id":801,"main":"Clouds","description":"few
+        clouds","icon":"02d"}],"pop":0},{"dt":1637096400,"temp":79.27,"feels_like":79.27,"pressure":1017,"humidity":45,"dew_point":56.46,"uvi":1.72,"clouds":18,"visibility":10000,"wind_speed":13.31,"wind_deg":183,"wind_gust":17.09,"weather":[{"id":801,"main":"Clouds","description":"few
+        clouds","icon":"02d"}],"pop":0},{"dt":1637100000,"temp":77.86,"feels_like":77.7,"pressure":1016,"humidity":50,"dew_point":57.65,"uvi":0.71,"clouds":14,"visibility":10000,"wind_speed":12.59,"wind_deg":181,"wind_gust":16.69,"weather":[{"id":801,"main":"Clouds","description":"few
+        clouds","icon":"02d"}],"pop":0},{"dt":1637103600,"temp":75.52,"feels_like":75.45,"pressure":1016,"humidity":57,"dew_point":59.36,"uvi":0.15,"clouds":11,"visibility":10000,"wind_speed":11.05,"wind_deg":174,"wind_gust":16.8,"weather":[{"id":801,"main":"Clouds","description":"few
+        clouds","icon":"02d"}],"pop":0},{"dt":1637107200,"temp":73.18,"feels_like":73.2,"pressure":1017,"humidity":64,"dew_point":60.13,"uvi":0,"clouds":9,"visibility":10000,"wind_speed":10.42,"wind_deg":169,"wind_gust":18.39,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637110800,"temp":71.96,"feels_like":72.01,"pressure":1017,"humidity":67,"dew_point":60.15,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":9.98,"wind_deg":169,"wind_gust":20.15,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637114400,"temp":71.19,"feels_like":71.15,"pressure":1017,"humidity":67,"dew_point":59.72,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":9.78,"wind_deg":171,"wind_gust":21.3,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637118000,"temp":70.66,"feels_like":70.57,"pressure":1017,"humidity":67,"dew_point":59.32,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":9.78,"wind_deg":171,"wind_gust":22.57,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637121600,"temp":70.27,"feels_like":70.14,"pressure":1017,"humidity":67,"dew_point":58.95,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":9.6,"wind_deg":174,"wind_gust":23.24,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637125200,"temp":69.85,"feels_like":69.69,"pressure":1017,"humidity":67,"dew_point":58.42,"uvi":0,"clouds":0,"visibility":10000,"wind_speed":9.31,"wind_deg":174,"wind_gust":24.11,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637128800,"temp":69.37,"feels_like":69.21,"pressure":1017,"humidity":68,"dew_point":58.33,"uvi":0,"clouds":1,"visibility":10000,"wind_speed":8.99,"wind_deg":173,"wind_gust":24.7,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"pop":0},{"dt":1637132400,"temp":69.21,"feels_like":69.03,"pressure":1017,"humidity":68,"dew_point":58.06,"uvi":0,"clouds":25,"visibility":10000,"wind_speed":8.84,"wind_deg":173,"wind_gust":24.52,"weather":[{"id":802,"main":"Clouds","description":"scattered
+        clouds","icon":"03n"}],"pop":0},{"dt":1637136000,"temp":70.9,"feels_like":70.65,"pressure":1016,"humidity":63,"dew_point":57.52,"uvi":0,"clouds":45,"visibility":10000,"wind_speed":9.98,"wind_deg":180,"wind_gust":22.79,"weather":[{"id":802,"main":"Clouds","description":"scattered
+        clouds","icon":"03n"}],"pop":0},{"dt":1637139600,"temp":72.55,"feels_like":72.23,"pressure":1016,"humidity":58,"dew_point":56.88,"uvi":0,"clouds":62,"visibility":10000,"wind_speed":11.45,"wind_deg":185,"wind_gust":20.89,"weather":[{"id":803,"main":"Clouds","description":"broken
+        clouds","icon":"04n"}],"pop":0}],"daily":[{"dt":1636999200,"sunrise":1636980391,"sunset":1637018759,"moonrise":1637012340,"moonset":1636968120,"moon_phase":0.39,"temp":{"day":77.63,"min":59.23,"max":79.59,"night":67.6,"eve":73.2,"morn":60.76},"feels_like":{"day":77.83,"night":67.87,"eve":73.36,"morn":60.64},"pressure":1022,"humidity":58,"dew_point":61.47,"wind_speed":9.84,"wind_deg":182,"wind_gust":20.58,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01d"}],"clouds":6,"pop":0,"uvi":3.82},{"dt":1637085600,"sunrise":1637066842,"sunset":1637105132,"moonrise":1637100420,"moonset":1637057760,"moon_phase":0.42,"temp":{"day":78.85,"min":64.42,"max":80.01,"night":69.85,"eve":73.18,"morn":64.53},"feels_like":{"day":78.85,"night":69.69,"eve":73.2,"morn":64.72},"pressure":1019,"humidity":47,"dew_point":56.97,"wind_speed":13.31,"wind_deg":183,"wind_gust":24.11,"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01d"}],"clouds":1,"pop":0,"uvi":3.77},{"dt":1637172000,"sunrise":1637153292,"sunset":1637191507,"moonrise":1637188560,"moonset":1637147460,"moon_phase":0.45,"temp":{"day":75.07,"min":69.21,"max":78.33,"night":71.1,"eve":73.78,"morn":72.12},"feels_like":{"day":75.11,"night":71.2,"eve":73.87,"morn":71.85},"pressure":1017,"humidity":60,"dew_point":60.39,"wind_speed":11.45,"wind_deg":185,"wind_gust":24.7,"weather":[{"id":804,"main":"Clouds","description":"overcast
+        clouds","icon":"04d"}],"clouds":100,"pop":0,"uvi":2.11},{"dt":1637258400,"sunrise":1637239742,"sunset":1637277883,"moonrise":1637276940,"moonset":1637237160,"moon_phase":0.48,"temp":{"day":66.04,"min":61.83,"max":69.6,"night":61.83,"eve":65.19,"morn":67.12},"feels_like":{"day":64.98,"night":60.01,"eve":64.18,"morn":67.19},"pressure":1025,"humidity":56,"dew_point":49.75,"wind_speed":13.78,"wind_deg":9,"wind_gust":22.08,"weather":[{"id":802,"main":"Clouds","description":"scattered
+        clouds","icon":"03d"}],"clouds":43,"pop":0,"uvi":3.63},{"dt":1637344800,"sunrise":1637326192,"sunset":1637364261,"moonrise":1637365440,"moonset":1637326860,"moon_phase":0.5,"temp":{"day":61.81,"min":51.3,"max":65.75,"night":58.93,"eve":61.84,"morn":51.3},"feels_like":{"day":58.91,"night":56.53,"eve":59.41,"morn":48.09},"pressure":1028,"humidity":26,"dew_point":26.33,"wind_speed":11.1,"wind_deg":39,"wind_gust":25.21,"weather":[{"id":802,"main":"Clouds","description":"scattered
+        clouds","icon":"03d"}],"clouds":33,"pop":0,"uvi":4},{"dt":1637431200,"sunrise":1637412642,"sunset":1637450640,"moonrise":1637454180,"moonset":1637416620,"moon_phase":0.54,"temp":{"day":69.96,"min":55,"max":70.66,"night":68.95,"eve":68.79,"morn":55},"feels_like":{"day":69.48,"night":68.61,"eve":68.43,"morn":53.17},"pressure":1022,"humidity":60,"dew_point":55.18,"wind_speed":8.97,"wind_deg":153,"wind_gust":14.2,"weather":[{"id":802,"main":"Clouds","description":"scattered
+        clouds","icon":"03d"}],"clouds":31,"pop":0,"uvi":4},{"dt":1637517600,"sunrise":1637499093,"sunset":1637537021,"moonrise":1637543280,"moonset":1637506320,"moon_phase":0.57,"temp":{"day":73.09,"min":68.59,"max":73.09,"night":68.85,"eve":70.12,"morn":68.86},"feels_like":{"day":73.02,"night":69.19,"eve":70.32,"morn":68.7},"pressure":1019,"humidity":62,"dew_point":59.25,"wind_speed":8.34,"wind_deg":137,"wind_gust":18.25,"weather":[{"id":804,"main":"Clouds","description":"overcast
+        clouds","icon":"04d"}],"clouds":100,"pop":0.21,"uvi":4},{"dt":1637604000,"sunrise":1637585543,"sunset":1637623404,"moonrise":1637632620,"moonset":1637595960,"moon_phase":0.6,"temp":{"day":67.86,"min":60.8,"max":69.82,"night":62.4,"eve":66.02,"morn":64.8},"feels_like":{"day":67.21,"night":60.46,"eve":64.35,"morn":65.25},"pressure":1018,"humidity":61,"dew_point":53.83,"wind_speed":14.09,"wind_deg":5,"wind_gust":25.19,"weather":[{"id":501,"main":"Rain","description":"moderate
+        rain","icon":"10d"}],"clouds":92,"pop":1,"rain":15.76,"uvi":4}]}'
+  recorded_at: Mon, 15 Nov 2021 10:17:34 GMT
+recorded_with: VCR 6.0.0
