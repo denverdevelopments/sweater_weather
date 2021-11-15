@@ -1,24 +1,27 @@
 class Activities
   attr_reader :id, :current_weather, :city
 
-  def initialize(data)
+  def initialize(today,act,relax)
     @id = nil
-    @city = data[:timezone].split('/').last
-    @current_weather = get_current(data[:current])
+    @destination = today[:timezone].split('/').last
+    @forecast = get_forecast(today) today[:current][:weather][:description]
+    @activities.get_acts(act,relax)
   end
 
-  def get_current(input)
-    current = Hash.new
-    current["datetime"] = Time.at(input[:dt])
-    current["sunrise"] = Time.at(input[:sunrise])
-    current["sunset"] = Time.at(input[:sunset])
-    current["temperature"] = input[:temp]
-    current["feels_like"] = input[:feels_like]
-    current["humidity"] = input[:humidity]
-    current["uvi"] = input[:uvi]
-    current["visibility"] = input[:visibility]
-    current["conditions"] = input[:weather][0][:description]
-    current["icon"] = input[:weather][0][:icon]
-    current
+  def get_forecast(today)
+    total = Hash.new
+    total[:summary] = today[:current][:weather][:description]
+    total[:temperature] = today[:current][:temp].to_s.concat(" F")
+    total
+  end
+
+  def get_acts(act,relax)
+    acts = []
+    first = Hash.new
+    first[:title]
+    last = Hash.new
+    acts[:summary] = today[:current][:weather][:description]
+    acts[:temperature] = today[:current][:temp].to_s.concat(" F")
+    acts
   end
 end
