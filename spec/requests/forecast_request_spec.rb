@@ -8,60 +8,140 @@ describe "Openweather and Mapquest API" do
 
     expect(response).to be_successful
 
-    future = JSON.parse(response.body, symbolize_names: true)
+    formatted = JSON.parse(response.body, symbolize_names: true)
     # binding.pry
-    expect(future).to be_a(Hash)
-    expect(future[:data].count).to eq(3)
-    expect(future[:data]).to be_a(Hash)
+    expect(formatted).to be_a(Hash)
+    expect(formatted[:data].count).to eq(3)
+    expect(formatted[:data]).to be_a(Hash)
 
-    expect(future[:data]).to have_key(:id)
-    expect(future[:data][:id]).to eq(nil)
+    expect(formatted[:data]).to have_key(:id)
+    expect(formatted[:data][:id]).to eq(nil)
 
-    expect(future[:data]).to have_key(:type)
-    expect(future[:data][:type]).to eq("forecast")
+    expect(formatted[:data]).to have_key(:type)
+    expect(formatted[:data][:type]).to eq("forecast")
 
-    expect(future[:data]).to have_key(:attributes)
-    expect(future[:data][:attributes]).to be_a(Hash)
+    expect(formatted[:data]).to have_key(:attributes)
+    expect(formatted[:data][:attributes]).to be_a(Hash)
 
-    expect(future[:data][:attributes]).to have_key(:id)
-    expect(future[:data][:attributes][:id]).to eq(nil)
+    expect(formatted[:data][:attributes]).to have_key(:id)
+    expect(formatted[:data][:attributes][:id]).to eq(nil)
 
-    expect(future[:data][:attributes]).to have_key(:type)
-    expect(future[:data][:attributes][:type]).to eq("forecast")
+    expect(formatted[:data][:attributes]).to have_key(:type)
+    expect(formatted[:data][:attributes][:type]).to eq("forecast")
 
-    expect(future[:data][:attributes]).to have_key(:current_weather)
-    expect(future[:data][:attributes][:current_weather]).to be_an(Hash)
+    expect(formatted[:data][:attributes]).to have_key(:current_weather)
+    expect(formatted[:data][:attributes][:current_weather]).to be_an(Hash)
 
-    expect(future[:data][:attributes][:current_weather]).to have_key(:datetime)
-    expect(future[:data][:attributes][:current_weather][:datetime]).to be_an(String)
+    now = formatted[:data][:attributes][:current_weather]
 
-    expect(future[:data][:attributes][:current_weather]).to have_key(:sunrise)
-    expect(future[:data][:attributes][:current_weather][:sunrise]).to be_an(String)
+    expect(now).to have_key(:datetime)
+    expect(now[:datetime]).to be_an(String)
 
-    expect(future[:data][:attributes][:current_weather]).to have_key(:sunset)
-    expect(future[:data][:attributes][:current_weather][:sunset]).to be_an(String)
+    expect(now).to have_key(:sunrise)
+    expect(now[:sunrise]).to be_an(String)
 
-    expect(future[:data][:attributes][:current_weather]).to have_key(:temperature)
-    expect(future[:data][:attributes][:current_weather][:temperature]).to be_an(Float)
+    expect(now).to have_key(:sunset)
+    expect(now[:sunset]).to be_an(String)
 
-    expect(future[:data][:attributes][:current_weather]).to have_key(:feels_like)
-    expect(future[:data][:attributes][:current_weather][:feels_like]).to be_an(Float)
+    expect(now).to have_key(:temperature)
+    expect(now[:temperature]).to be_an(Float)
 
-    expect(future[:data][:attributes][:current_weather]).to have_key(:humidity)
-    expect(future[:data][:attributes][:current_weather][:humidity]).to be_an(Integer)
+    expect(now).to have_key(:feels_like)
+    expect(now[:feels_like]).to be_an(Float)
 
-    expect(future[:data][:attributes][:current_weather]).to have_key(:uvi)
-    expect(future[:data][:attributes][:current_weather][:uvi]).to be_an(Integer)
+    expect(now).to have_key(:humidity)
+    expect(now[:humidity]).to be_an(Integer)
 
-    expect(future[:data][:attributes][:current_weather]).to have_key(:visibility)
-    expect(future[:data][:attributes][:current_weather][:visibility]).to be_an(Integer)
+    expect(now).to have_key(:uvi)
+    expect(now[:uvi]).to be_an(Integer)
 
-    expect(future[:data][:attributes][:current_weather]).to have_key(:conditions)
-    expect(future[:data][:attributes][:current_weather][:conditions]).to be_an(String)
+    expect(now).to have_key(:visibility)
+    expect(now[:visibility]).to be_an(Integer)
 
-    expect(future[:data][:attributes][:current_weather]).to have_key(:icon)
-    expect(future[:data][:attributes][:current_weather][:icon]).to be_an(String)
+    expect(now).to have_key(:conditions)
+    expect(now[:conditions]).to be_an(String)
 
-    expect(future[:data][:attributes][:current_weather]).not_to have_key(:pressure)
+    expect(now).to have_key(:icon)
+    expect(now[:icon]).to be_an(String)
+
+    expect(now).not_to have_key(:pressure)
+    expect(now).not_to have_key(:dew_point)
+    expect(now).not_to have_key(:clouds)
+    expect(now).not_to have_key(:wind_speed)
+    expect(now).not_to have_key(:wind_deg)
+    expect(now).not_to have_key(:wind_gust)
+  end
+
+  it "retrieves daily forecasts from city-state" do
+    city_state = "Houston, TX"
+    get "/api/v1/forecast?location=#{city_state}"
+
+    expect(response).to be_successful
+
+    formatted = JSON.parse(response.body, symbolize_names: true)
+    # binding.pry
+    expect(formatted).to be_a(Hash)
+    expect(formatted[:data].count).to eq(3)
+    expect(formatted[:data]).to be_a(Hash)
+
+    expect(formatted[:data]).to have_key(:id)
+    expect(formatted[:data][:id]).to eq(nil)
+
+    expect(formatted[:data]).to have_key(:type)
+    expect(formatted[:data][:type]).to eq("forecast")
+
+    expect(formatted[:data]).to have_key(:attributes)
+    expect(formatted[:data][:attributes]).to be_a(Hash)
+
+    expect(formatted[:data][:attributes]).to have_key(:id)
+    expect(formatted[:data][:attributes][:id]).to eq(nil)
+
+    expect(formatted[:data][:attributes]).to have_key(:type)
+    expect(formatted[:data][:attributes][:type]).to eq("forecast")
+
+    expect(formatted[:data][:attributes]).to have_key(:daily_weather)
+    expect(formatted[:data][:attributes][:daily_weather]).to be_an(Hash)
+
+    days = formatted[:data][:attributes][:daily_weather]
+
+    expect(days).to be_a(Array)
+    expect(days.count).to eq(5)
+    expect(days).first.to be_a(Hash)
+
+    expect(days.first).to have_key(:date)
+    expect(days.first[:date]).to be_an(String)
+
+    expect(days.first).to have_key(:sunrise)
+    expect(days.first[:sunrise]).to be_an(String)
+
+    expect(days.first).to have_key(:sunset)
+    expect(days.first[:sunset]).to be_an(String)
+
+    expect(days.first).to have_key(:max_temp)
+    expect(days.first[:max_temp]).to be_an(Float)
+
+    expect(days.first).to have_key(:min_temp)
+    expect(days.first[:min_temp]).to be_an(Float)
+
+    expect(days.first).to have_key(:conditions)
+    expect(days.first[:conditions]).to be_an(String)
+
+    expect(days.first).to have_key(:icon)
+    expect(days.first[:icon]).to be_an(String)
+
+    expect(days.first).not_to have_key(:moonrise)
+    expect(days.first).not_to have_key(:moonset)
+    expect(days.first).not_to have_key(:moon_phase)
+    expect(days.first).not_to have_key(:feels_like)
+    expect(days.first).not_to have_key(:pressure)
+    expect(days.first).not_to have_key(:humidity)
+    expect(days.first).not_to have_key(:dew_point)
+    expect(days.first).not_to have_key(:wind_speed)
+    expect(days.first).not_to have_key(:wind_deg)
+    expect(days.first).not_to have_key(:wind_gust)
+    expect(days.first).not_to have_key(:moonrise)
+    expect(days.first).not_to have_key(:clouds)
+    expect(days.first).not_to have_key(:pop)
+    expect(days.first).not_to have_key(:uvi)
   end
 end
