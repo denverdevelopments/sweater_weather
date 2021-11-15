@@ -144,4 +144,65 @@ describe "Openweather and Mapquest API" do
     expect(days.first).not_to have_key(:pop)
     expect(days.first).not_to have_key(:uvi)
   end
+
+  it "retrieves hourly forecasts from city-state" do
+    city_state = "Houston, TX"
+    get "/api/v1/forecast?location=#{city_state}"
+
+    expect(response).to be_successful
+
+    formatted = JSON.parse(response.body, symbolize_names: true)
+    # binding.pry
+    expect(formatted).to be_a(Hash)
+    expect(formatted[:data].count).to eq(3)
+    expect(formatted[:data]).to be_a(Hash)
+
+    expect(formatted[:data]).to have_key(:id)
+    expect(formatted[:data][:id]).to eq(nil)
+
+    expect(formatted[:data]).to have_key(:type)
+    expect(formatted[:data][:type]).to eq("forecast")
+
+    expect(formatted[:data]).to have_key(:attributes)
+    expect(formatted[:data][:attributes]).to be_a(Hash)
+
+    expect(formatted[:data][:attributes]).to have_key(:id)
+    expect(formatted[:data][:attributes][:id]).to eq(nil)
+
+    expect(formatted[:data][:attributes]).to have_key(:type)
+    expect(formatted[:data][:attributes][:type]).to eq("forecast")
+
+    expect(formatted[:data][:attributes]).to have_key(:hourly_weather)
+    expect(formatted[:data][:attributes][:hourly_weather]).to be_an(Array)
+
+    hours = formatted[:data][:attributes][:hourly_weather]
+
+    expect(hours).to be_a(Array)
+    expect(hours.count).to eq(8)
+    expect(hours.first).to be_a(Hash)
+
+    expect(hours.first).to have_key(:time)
+    expect(hours.first[:time]).to be_an(String)
+
+    expect(hours.first).to have_key(:temperature)
+    expect(hours.first[:temperature]).to be_an(Float)
+
+    expect(hours.first).to have_key(:conditions)
+    expect(hours.first[:conditions]).to be_an(String)
+
+    expect(hours.first).to have_key(:icon)
+    expect(hours.first[:icon]).to be_an(String)
+
+    expect(hours.first).not_to have_key(:feels_like)
+    expect(hours.first).not_to have_key(:pressure)
+    expect(hours.first).not_to have_key(:humidity)
+    expect(hours.first).not_to have_key(:dew_point)
+    expect(hours.first).not_to have_key(:uvi)
+    expect(hours.first).not_to have_key(:clouds)
+    expect(hours.first).not_to have_key(:visibility)
+    expect(hours.first).not_to have_key(:wind_speed)
+    expect(hours.first).not_to have_key(:wind_deg)
+    expect(hours.first).not_to have_key(:wind_gust)
+    expect(hours.first).not_to have_key(:pop)
+  end
 end
