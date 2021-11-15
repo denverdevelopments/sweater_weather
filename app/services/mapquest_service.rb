@@ -1,18 +1,7 @@
 class MapquestService
-  # def self.reviews(id)
-  #   request("/3/movie/#{id}/reviews")[:results]
-  # end
-  #
-  # def self.top_forty(page)
-  #   request("/3/discover/movie?page=#{page}")[:results]
-  # end
-  #
-  # def self.search_title(query)
-  #   request("/3/search/movie?query=#{query}")[:results]
-  # end
 
   def self.find_coordinates(city_state)
-    request("/geocoding/v1/address?location=#{city_state}") #[:results]
+    request("/geocoding/v1/address?location=#{city_state}")
   end
 
   private
