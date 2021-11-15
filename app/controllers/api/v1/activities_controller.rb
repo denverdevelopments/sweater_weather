@@ -3,9 +3,10 @@ class Api::V1::ActivitiesController < ApplicationController
     # if params[:destination]
       # acts = ActivityFacade.get_fun(params[:destination])
       mapped = MapquestFacade.get_long_lat(params[:destination])
-      forecast = WeatherFacade.get_forecast(mapped.lat, mapped.long)
-      # render json: mapped.city
-      render json: TodaySerializer.new(forecast)
+      today = WeatherFacade.get_forecast(mapped.lat, mapped.long)
+      total = ActivitiesFacade.get_all(today,params[:destination])
+
+      render json: ActivitiesSerializer.new(total)
       # render json: ForecastSerializer.new(forecast)
     # else
     #   render json: {errors: ["Invalid Input"]}, status: 404

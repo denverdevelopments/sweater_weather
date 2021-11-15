@@ -9,7 +9,7 @@ describe "Openweather, Mapquest, Bored API" do
       expect(response).to be_successful
 
       formatted = JSON.parse(response.body, symbolize_names: true)
-      binding.pry
+      # binding.pry
       expect(formatted).to be_a(Hash)
 
       expect(formatted).to have_key(:data)
@@ -25,55 +25,53 @@ describe "Openweather, Mapquest, Bored API" do
       expect(formatted[:data]).to have_key(:attributes)
       expect(formatted[:data][:attributes]).to be_a(Hash)
 
-      inner = formatted[:data][:attributes]
+      now = formatted[:data][:attributes]
 
-      expect(inner).to have_key(:id)
-      expect(inner[:id]).to eq(nil)
+      expect(now).to have_key(:id)
+      expect(now[:id]).to eq(nil)
 
-      expect(inner).to have_key(:city)
-      expect(inner[:city]).to eq("Chicago")
+      expect(now).to have_key(:city)
+      expect(now[:city]).to eq("Chicago")
 
-      expect(formatted[:data][:attributes]).to have_key(:current_weather)
-      expect(formatted[:data][:attributes][:current_weather]).to be_an(Hash)
+      expect(now).to have_key(:current_weather)
+      expect(now[:current_weather]).to be_an(Hash)
 
-      now = formatted[:data][:attributes][:current_weather]
+      expect(now[:current_weather]).to have_key(:datetime)
+      expect(now[:current_weather][:datetime]).to be_an(String)
 
-      expect(now).to have_key(:datetime)
-      expect(now[:datetime]).to be_an(String)
+      expect(now[:current_weather]).to have_key(:sunrise)
+      expect(now[:current_weather][:sunrise]).to be_an(String)
 
-      expect(now).to have_key(:sunrise)
-      expect(now[:sunrise]).to be_an(String)
+      expect(now[:current_weather]).to have_key(:sunset)
+      expect(now[:current_weather][:sunset]).to be_an(String)
 
-      expect(now).to have_key(:sunset)
-      expect(now[:sunset]).to be_an(String)
+      expect(now[:current_weather]).to have_key(:temperature)
+      expect(now[:current_weather][:temperature]).to be_an(Float)
 
-      expect(now).to have_key(:temperature)
-      expect(now[:temperature]).to be_an(Float)
+      expect(now[:current_weather]).to have_key(:feels_like)
+      expect(now[:current_weather][:feels_like]).to be_an(Float)
 
-      expect(now).to have_key(:feels_like)
-      expect(now[:feels_like]).to be_an(Float)
+      expect(now[:current_weather]).to have_key(:humidity)
+      expect(now[:current_weather][:humidity]).to be_an(Integer)
 
-      expect(now).to have_key(:humidity)
-      expect(now[:humidity]).to be_an(Integer)
+      expect(now[:current_weather]).to have_key(:uvi)
+      expect(now[:current_weather][:uvi]).to be_an(Float)
 
-      expect(now).to have_key(:uvi)
-      expect(now[:uvi]).to be_an(Float)
+      expect(now[:current_weather]).to have_key(:visibility)
+      expect(now[:current_weather][:visibility]).to be_an(Integer)
 
-      expect(now).to have_key(:visibility)
-      expect(now[:visibility]).to be_an(Integer)
+      expect(now[:current_weather]).to have_key(:conditions)
+      expect(now[:current_weather][:conditions]).to be_an(String)
 
-      expect(now).to have_key(:conditions)
-      expect(now[:conditions]).to be_an(String)
+      expect(now[:current_weather]).to have_key(:icon)
+      expect(now[:current_weather][:icon]).to be_an(String)
 
-      expect(now).to have_key(:icon)
-      expect(now[:icon]).to be_an(String)
-
-      expect(now).not_to have_key(:pressure)
-      expect(now).not_to have_key(:dew_point)
-      expect(now).not_to have_key(:clouds)
-      expect(now).not_to have_key(:wind_speed)
-      expect(now).not_to have_key(:wind_deg)
-      expect(now).not_to have_key(:wind_gust)
+      expect(now[:current_weather]).not_to have_key(:pressure)
+      expect(now[:current_weather]).not_to have_key(:dew_point)
+      expect(now[:current_weather]).not_to have_key(:clouds)
+      expect(now[:current_weather]).not_to have_key(:wind_speed)
+      expect(now[:current_weather]).not_to have_key(:wind_deg)
+      expect(now[:current_weather]).not_to have_key(:wind_gust)
     end
 
     # it "retrieves daily forecasts from city-state", :vcr do

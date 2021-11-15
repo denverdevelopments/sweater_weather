@@ -1,4 +1,4 @@
-class Today
+class Activities
   attr_reader :id, :current_weather, :city
 
   def initialize(data)
