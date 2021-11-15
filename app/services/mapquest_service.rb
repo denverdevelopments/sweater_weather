@@ -12,7 +12,7 @@ class MapquestService
   # end
 
   def self.find_coordinates(city_state)
-    request("/geocoding/v1/address?key=KEY&location=#{city_state}")[:results]
+    request("/geocoding/v1/address?location=#{city_state}") #[:results]
   end
 
   private
