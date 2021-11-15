@@ -1,4 +1,4 @@
-class Forecasts
+class Forecast
   attr_reader :id, :type, :current_weather, :daily_weather, :hourly_weather
 
   def initialize(data)
