@@ -33,6 +33,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'faraday'
 gem 'figaro'
 gem 'json'
+gem 'jsonapi-serializer'
 
 
 group :development, :test do
