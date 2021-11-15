@@ -7,9 +7,10 @@ RSpec.describe 'WeatherFacade' do
         lat = 39.738453; long = -104.984853
         response = WeatherFacade.get_forecast(lat,long)
 
-        expect(response).to be_a(Today)
+        expect(response).to be_a(Hash)
 
-        expect(response.current_weather).to be_a(Hash)
+        expect(response).to have_key :current
+        expect(response[:current]).to be_a(Hash)
       end
     end
   end

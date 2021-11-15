@@ -4,8 +4,7 @@ class Api::V1::ActivitiesController < ApplicationController
       # acts = ActivityFacade.get_fun(params[:destination])
       mapped = MapquestFacade.get_long_lat(params[:destination])
       today = WeatherFacade.get_forecast(mapped.lat, mapped.long)
-      total = ActivitiesFacade.get_all(today,params[:destination])
-
+      total = ActivitiesFacade.get_all(today)
       render json: ActivitiesSerializer.new(total)
       # render json: ForecastSerializer.new(forecast)
     # else

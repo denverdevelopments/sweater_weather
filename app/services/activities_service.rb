@@ -1,4 +1,4 @@
-class BoredService
+class ActivitiesService
 
   def self.find_by_type(activity)
     request("/api/activity?type=#{activity}")
