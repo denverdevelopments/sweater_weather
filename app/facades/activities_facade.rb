@@ -12,7 +12,6 @@ class ActivitiesFacade
     # else
     #   act = ActivitiesService.find_by_type(busywork)
     # end
-    binding
     if today[:current][:temp] > 60
       activity = "recreational"
     elsif today[:current][:temp] < 50

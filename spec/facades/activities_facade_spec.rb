@@ -27,8 +27,18 @@ RSpec.describe 'ActivitiesFacade' do
                     [{:id=>800, :main=>"Clear", :description=>"clear sky", :icon=>"01d"}]}
                   }
         fun = ActivitiesFacade.get_all(input)
-          binding.pry
+
         expect(fun).to be_a(Activities)
+
+        expect(fun).to have_key(:activities)
+        expect(fun[:activities]).to be_an(Array)
+
+        expect(fun).to have_key(:destination)
+        expect(fun[:destination]).to be_an(String)
+
+        expect(fun).to have_key(:forecast)
+        expect(fun[:forecast]).to be_an(Hash)
+
       end
     end
   end
