@@ -12,6 +12,7 @@ class ActivitiesFacade
     # else
     #   act = ActivitiesService.find_by_type(busywork)
     # end
+    binding
     if today[:current][:temp] > 60
       activity = "recreational"
     elsif today[:current][:temp] < 50
@@ -23,8 +24,7 @@ class ActivitiesFacade
 
     activity2 = "relaxation"
     relax = ActivitiesService.find_by_type(activity2)
-    xy = Activities.new(today, act, relax)
-    binding.pry
+    Activities.new(today, act, relax)
   end
 
 end
