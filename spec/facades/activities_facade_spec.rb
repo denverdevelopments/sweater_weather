@@ -26,19 +26,21 @@ RSpec.describe 'ActivitiesFacade' do
                    :weather=>
                     [{:id=>800, :main=>"Clear", :description=>"clear sky", :icon=>"01d"}]}
                   }
-        fun = ActivitiesFacade.get_all(input)
+        headed = "Denver, CO"
+
+        fun = ActivitiesFacade.get_all(input, headed)
 
         expect(fun).to be_a(Activities)
 
-        expect(fun).to have_key(:activities)
-        expect(fun[:activities]).to be_an(Array)
+        expect(fun.activities).to be_an(Array)
+        expect(fun.activities.count).to eq(2)
 
-        expect(fun).to have_key(:destination)
-        expect(fun[:destination]).to be_an(String)
+        expect(fun.destination).to be_an(String)
+        expect(fun.destination).to eq("Denver, CO")
 
-        expect(fun).to have_key(:forecast)
-        expect(fun[:forecast]).to be_an(Hash)
-
+        expect(fun.forecast).to be_an(Hash)
+        expect(fun.forecast).to have_key(:summary)
+        expect(fun.forecast).to have_key(:temperature)
       end
     end
   end

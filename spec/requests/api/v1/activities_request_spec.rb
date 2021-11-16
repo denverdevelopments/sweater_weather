@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-describe "Openweather, Mapquest, Bored API" do
+describe "Bored API" do
   context "Happy Path" do
-    it "retrieves city and current forecast from destination", :vcr do
+    it "retrieves an activity from a destination", :vcr do
       city_state = "Houston, TX"
       get "/api/v1/activities?destination=#{city_state}"
 
       expect(response).to be_successful
 
       formatted = JSON.parse(response.body, symbolize_names: true)
-        
+
       expect(formatted).to be_a(Hash)
 
       expect(formatted).to have_key(:data)
@@ -31,8 +31,7 @@ describe "Openweather, Mapquest, Bored API" do
       expect(now[:id]).to eq(nil)
 
       expect(now).to have_key(:destination)
-      expect(now[:destination]).to eq("Houston, TX")
-      # expect(now[:destination]).to eq("Chicago")
+      expect(now[:destination]).to eq("Chicago")
 
       expect(now).to have_key(:activities)
       expect(now[:activities]).to be_an(Array)

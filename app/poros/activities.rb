@@ -1,20 +1,18 @@
 class Activities
   attr_reader :id, :destination, :forecast, :activities
 
-  def initialize(today, act, relax)
+  def initialize(today, act, relax, headed)
     @id = nil
-    @destination = today[:timezone].split('/').last
+    @destination = headed
     @forecast = get_forecast(today)
     @activities = get_acts(act,relax)
   end
 
   def get_forecast(today)
-
-    total = {
+    {
       summary: today[:current][:weather][0][:description],
       temperature: today[:current][:temp].to_s.concat(" F")
     }
-    total
   end
 
   def get_acts(act,relax)
