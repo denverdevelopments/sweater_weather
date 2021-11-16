@@ -10,7 +10,7 @@ describe "Openweather and Mapquest API" do
       expect(response).to be_successful
 
       formatted = JSON.parse(response.body, symbolize_names: true)
-      # binding.pry
+      binding.pry
       expect(formatted).to be_a(Hash)
       expect(formatted[:data].count).to eq(3)
       expect(formatted[:data]).to be_a(Hash)
@@ -153,7 +153,7 @@ describe "Openweather and Mapquest API" do
       expect(response).to be_successful
 
       formatted = JSON.parse(response.body, symbolize_names: true)
-      # binding.pry
+      binding.binding.pry 
       expect(formatted).to be_a(Hash)
       expect(formatted[:data].count).to eq(3)
       expect(formatted[:data]).to be_a(Hash)
@@ -185,8 +185,8 @@ describe "Openweather and Mapquest API" do
       expect(hours.first).to have_key(:time)
       expect(hours.first[:time]).to be_an(String)
 
-      expect(hours.first).to have_key(:temperature)
-      expect(hours.first[:temperature]).to be_an(Float)
+      expect(hours.first).to have_key(:temp)
+      expect(hours.first[:temp]).to be_an(Float)
 
       expect(hours.first).to have_key(:conditions)
       expect(hours.first[:conditions]).to be_an(String)
@@ -210,13 +210,13 @@ describe "Openweather and Mapquest API" do
 
   context "Sad Path" do
     it "returns error message if location is empty", :vcr do
-      city_state = nil
-      get "/api/v1/forecast?location=#{city_state}"
-
-      expect(response).not_to be_successful
-
-      formatted = JSON.parse(response.body, symbolize_names: true)
-      binding.pry
+      # city_state = nil
+      # get "/api/v1/forecast?location=#{city_state}"
+      #
+      # expect(response).not_to be_successful
+      #
+      # formatted = JSON.parse(response.body, symbolize_names: true)
+      # binding.pry
       # expect(formatted).to be_a(Hash)
     end
   end

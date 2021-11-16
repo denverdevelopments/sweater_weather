@@ -11,10 +11,12 @@ class Forecast
 
   def get_current(input)
     current = Hash.new
+    current["dt"] = Time.at(input[:dt])
     current["datetime"] = Time.at(input[:dt])
     current["sunrise"] = Time.at(input[:sunrise])
     current["sunset"] = Time.at(input[:sunset])
-    current["temperature"] = input[:temp]
+    # current["temperature"] = input[:temp]
+    current["temp"] = input[:temp]
     current["feels_like"] = input[:feels_like]
     current["humidity"] = input[:humidity]
     current["uvi"] = input[:uvi]
