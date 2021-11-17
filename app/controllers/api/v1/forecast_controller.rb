@@ -1,6 +1,6 @@
 class Api::V1::ForecastController < ApplicationController
   def index
-    if !params[:location].empty? && params[:location].is_a?(String)
+    if !params[:location].empty? && !params[:location].match(/^(\d)+$/) && !params[:location].delete('.').match(/^(\d)+$/)
       mapped = MapquestFacade.get_long_lat(params[:location])
       forecast = WeatherFacade.get_forecast(mapped.lat, mapped.long)
       render json: ForecastSerializer.new(forecast)

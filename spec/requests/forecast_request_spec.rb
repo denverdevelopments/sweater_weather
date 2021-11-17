@@ -5,7 +5,6 @@ describe "Openweather and Mapquest API" do
     it "retrieves current forecast from city-state", :vcr do
       city_state = "Houston, TX"
       get "/api/v1/forecast?location=#{city_state}"
-      # get "/api/v1/forecast?location=denver,co"
 
       expect(response).to be_successful
 
@@ -153,7 +152,7 @@ describe "Openweather and Mapquest API" do
       expect(response).to be_successful
 
       formatted = JSON.parse(response.body, symbolize_names: true)
-      # binding.pry
+
       expect(formatted).to be_a(Hash)
       expect(formatted[:data].count).to eq(3)
       expect(formatted[:data]).to be_a(Hash)
@@ -224,6 +223,34 @@ describe "Openweather and Mapquest API" do
       expect(formatted[:message]).to eq("Invalid Input")
     end
 
+    it "returns error message if location is an integer", :vcr do
+      city_state = 12
+      get "/api/v1/forecast?location=#{city_state}"
 
+      expect(response).not_to be_successful
+      expect(response.status).to eq(404)
+
+      formatted = JSON.parse(response.body, symbolize_names: true)
+
+      expect(formatted).to be_a(Hash)
+      expect(formatted[:status]).to eq("not_found")
+      expect(formatted[:code]).to eq(404)
+      expect(formatted[:message]).to eq("Invalid Input")
+    end
+
+    it "returns error message if location is a float", :vcr do
+      city_state = 34.5
+      get "/api/v1/forecast?location=#{city_state}"
+
+      expect(response).not_to be_successful
+      expect(response.status).to eq(404)
+
+      formatted = JSON.parse(response.body, symbolize_names: true)
+
+      expect(formatted).to be_a(Hash)
+      expect(formatted[:status]).to eq("not_found")
+      expect(formatted[:code]).to eq(404)
+      expect(formatted[:message]).to eq("Invalid Input")
+    end
   end
 end
