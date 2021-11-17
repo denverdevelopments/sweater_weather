@@ -5,6 +5,11 @@ class MapquestService
     JSON.parse(response.body, symbolize_names: true)
   end
 
+  def self.find_route(start, finish)
+    response = request("/directions/v2/route&from=#{start}&to=#{finish}")
+    JSON.parse(response.body, symbolize_names: true)
+  end
+
   private
 
   def self.request(path)
