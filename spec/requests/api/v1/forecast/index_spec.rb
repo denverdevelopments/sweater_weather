@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Openweather and Mapquest API" do
+describe "Openweather and Mapquest API forecast index" do
   context "Happy Path" do
     it "retrieves current forecast from city-state", :vcr do
       city_state = "Houston, TX"
