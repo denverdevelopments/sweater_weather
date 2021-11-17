@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Api::V1::Sessions", type: :request do
-  describe 'session login' do
+  describe 'Session login' do
     before :each do
       input = {
           "email": "tester@test.com",
@@ -19,11 +19,11 @@ RSpec.describe "Api::V1::Sessions", type: :request do
         }
 
         post("/api/v1/sessions", headers: {"Content_Type": "application/json", "Accept": "application/json"}, params: details.to_json)
-        expect(response).to be_successful
 
         formatted = JSON.parse(response.body, symbolize_names: true)
         new_user = User.last
 
+        expect(response).to be_successful
         expect(formatted).to be_a(Hash)
         expect(formatted[:data]).to be_a(Hash)
         expect(formatted[:data][:id].to_i).to eq(new_user.id)
@@ -34,15 +34,16 @@ RSpec.describe "Api::V1::Sessions", type: :request do
     end
 
     describe 'Sad Path' do
-      it 'sends an error when params sent are invalid', :vcr do
+      it 'sends an error for invalid params', :vcr do
         details = {
             "email": "tester@test.com",
             "password": "wrong"
         }
         post("/api/v1/sessions", headers: {"Content_Type": "application/json", "Accept": "application/json"}, params: details.to_json)
-        expect(response).to_not be_successful
 
         formatted = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to_not be_successful
         expect(formatted).to have_key(:errors)
         expect(formatted[:errors]).to eq('Password or email incorrect')
       end
@@ -52,9 +53,10 @@ RSpec.describe "Api::V1::Sessions", type: :request do
             "password": "password"
         }
         post("/api/v1/sessions", headers: {"Content_Type": "application/json", "Accept": "application/json"}, params: details.to_json)
-        expect(response).to_not be_successful
 
         formatted = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to_not be_successful
         expect(formatted).to have_key(:errors)
         expect(formatted[:errors]).to eq('Password or email incorrect')
       end
