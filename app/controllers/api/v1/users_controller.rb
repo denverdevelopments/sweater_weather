@@ -8,7 +8,7 @@ class Api::V1::UsersController < ApplicationController
       if user.save
           render json: UserSerializer.new(user), status: 201
       else
-        render json: { errors: 'Password error' }, status: :bad_request
+        render json: { errors: 'Password or email error' }, status: :bad_request
       end
     end
 

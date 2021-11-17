@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe "Api::V1::Users", type: :request do
-  describe 'User Create' do
+RSpec.describe "Api::V1::Users Register", type: :request do
+  describe 'User create' do
     describe 'Happy Path' do
-      it 'send a user when succesful creation occurs', :vcr do
+      it 'send a user when successful creation occurs', :vcr do
 
         details = {
             "email": "tester@test.com",
@@ -39,8 +39,8 @@ RSpec.describe "Api::V1::Users", type: :request do
 
         formatted = JSON.parse(response.body, symbolize_names: true)
         expect(formatted).to have_key(:errors)
-        expect(formatted[:errors]).to eq('Password error')
-      end 
+        expect(formatted[:errors]).to eq('Password or email error')
+      end
 
       it 'sends an error when field is empty', :vcr do
         details = {
@@ -52,7 +52,7 @@ RSpec.describe "Api::V1::Users", type: :request do
 
         formatted = JSON.parse(response.body, symbolize_names: true)
         expect(formatted).to have_key(:errors)
-        expect(formatted[:errors]).to eq('Password error')
+        expect(formatted[:errors]).to eq('Password or email error')
       end
     end
   end
