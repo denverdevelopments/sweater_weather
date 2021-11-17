@@ -47,7 +47,7 @@ describe "Openweather and Mapquest API forecast index" do
       expect(now[:temperature]).to be_an(Float)
 
       expect(now).to have_key(:feels_like)
-      expect(now[:feels_like]).to be_an(Float)
+      expect(now[:feels_like]).to be_an(Integer)
 
       expect(now).to have_key(:humidity)
       expect(now[:humidity]).to be_an(Integer)
