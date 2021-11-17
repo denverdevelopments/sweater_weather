@@ -10,30 +10,32 @@ class Forecast
   end
 
   def get_current(input)
-    current = Hash.new
-    current["datetime"] = Time.at(input[:dt])
-    current["sunrise"] = Time.at(input[:sunrise])
-    current["sunset"] = Time.at(input[:sunset])
-    current["temperature"] = input[:temp]
-    current["feels_like"] = input[:feels_like]
-    current["humidity"] = input[:humidity]
-    current["uvi"] = input[:uvi]
-    current["visibility"] = input[:visibility]
-    current["conditions"] = input[:weather][0][:description]
-    current["icon"] = input[:weather][0][:icon]
-    current
+    # current = Hash.new
+    {
+      datetime: Time.at(input[:dt]),
+      sunrise: Time.at(input[:sunrise]),
+      sunset: Time.at(input[:sunset]),
+      temperature: input[:temp],
+      feels_like: input[:feels_like],
+      humidity: input[:humidity],
+      uvi: input[:uvi],
+      visibility: input[:visibility],
+      conditions: input[:weather][0][:description],
+      icon: input[:weather][0][:icon]
+    }
+    # current
   end
 
   def get_daily(input)
     input.map do |day|
       {
-        "time" => Time.at(day[:dt]),
-        "sunrise" => Time.at(day[:sunrise]),
-        "sunset" => Time.at(day[:sunset]),
-        "max_temp" => day[:temp][:max],
-        "min_temp" => day[:temp][:max],
-        "conditions" => day[:weather].first[:description],
-        "icon" => day[:weather].first[:icon]
+        time: Time.at(day[:dt]),
+        sunrise: Time.at(day[:sunrise]),
+        sunset: Time.at(day[:sunset]),
+        max_temp: day[:temp][:max],
+        min_temp: day[:temp][:max],
+        conditions: day[:weather].first[:description],
+        icon: day[:weather].first[:icon]
       }
     end.first(5)
   end
@@ -41,10 +43,10 @@ class Forecast
   def get_hourly(input)
     input.map do |hour|
       {
-        "time" => Time.at(hour[:dt]).strftime("%R"),
-        "temperature" => hour[:temp],
-        "conditions" => hour[:weather].first[:description],
-        "icon" => hour[:weather].first[:icon]
+        time: Time.at(hour[:dt]).strftime("%R"),
+        temperature: hour[:temp],
+        conditions: hour[:weather].first[:description],
+        icon: hour[:weather].first[:icon]
       }
     end.first(8)
     # binding.pry
