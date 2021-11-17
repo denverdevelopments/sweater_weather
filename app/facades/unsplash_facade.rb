@@ -1,9 +1,9 @@
-class MapquestFacade
-  def self.get_long_lat(city_state)
-    if city_state
-      output = MapquestService.find_coordinates(city_state)
+class UnsplashFacade
+  def self.get_location(query)
+    if query
+      output = UnsplashService.find_location(query)
       sorted = output[:results][0][:locations][0] #[:latLng]
-      Coordinates.new(sorted)
+      Image.new(sorted)
     else
       render json: {status: :not_found, code: 404, message: "Invalid Input" }, status: :not_found
     end
