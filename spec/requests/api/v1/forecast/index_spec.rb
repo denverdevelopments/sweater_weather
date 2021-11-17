@@ -9,7 +9,7 @@ describe "Openweather and Mapquest API forecast index" do
       expect(response).to be_successful
 
       formatted = JSON.parse(response.body, symbolize_names: true)
-      # binding.pry
+      
       expect(formatted).to be_a(Hash)
       expect(formatted[:data].count).to eq(3)
       expect(formatted[:data]).to be_a(Hash)
