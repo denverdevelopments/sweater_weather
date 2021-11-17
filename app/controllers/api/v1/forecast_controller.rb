@@ -1,6 +1,6 @@
 class Api::V1::ForecastController < ApplicationController
   def index
-    if params[:location]
+    if !params[:location].empty? && params[:location].is_a?(String)
       mapped = MapquestFacade.get_long_lat(params[:location])
       forecast = WeatherFacade.get_forecast(mapped.lat, mapped.long)
       # binding.pry

@@ -214,10 +214,16 @@ describe "Openweather and Mapquest API" do
       get "/api/v1/forecast?location=#{city_state}"
 
       expect(response).not_to be_successful
+      expect(response.status).to eq(404)
 
       formatted = JSON.parse(response.body, symbolize_names: true)
-      binding.pry
-      # expect(formatted).to be_a(Hash)
+      # binding.pry
+      expect(formatted).to be_a(Hash)
+      expect(formatted[:status]).to eq("not_found")
+      expect(formatted[:code]).to eq(404)
+      expect(formatted[:message]).to eq("Invalid Input")
     end
+
+
   end
 end
