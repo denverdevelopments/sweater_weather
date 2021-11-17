@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe UnsplashService do
   it "can get location photos", :vcr do
     query = "Denver,CO"
-      response = UnsplashService.find_location(query)
+      response = UnsplashService.find_images(query)
 
     expect(response).to be_a Hash
     expect(response).to have_key :results

@@ -10,8 +10,7 @@ class WeatherService
     conn =  Faraday.new("https://api.openweathermap.org", params: {
           appid: ENV['openweather_key'],
           exclude: 'minutely,alerts',
-          units: 'imperial' }
-        )
+          units: 'imperial'}  )
     conn.get(path)
   end
 end
