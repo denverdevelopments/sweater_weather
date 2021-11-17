@@ -6,10 +6,9 @@ class MapquestFacade
   end
 
   def self.get_route(start, finish)
-    output = MapquestService.find_route(start, finish)
-    sorted = output[:route]
-    binding.pry
-  
-    RoadTrip.new(sorted, start, finish)
+    MapquestService.find_route(start, finish)
+    # sorted = output[:route]
+    # binding.pry
+    # RoadTrip.new(sorted, start, finish)
   end
 end

@@ -1,89 +1,77 @@
 require 'rails_helper'
 
 describe "RoadTrip Create" do
-  # context "Happy Path" do
-    it "retrieves route from two locations", :vcr do
-      start = "Houston, TX"
-      finish = "Denver, CO"
-      get "/directions/v2/route&from=#{start}&to=#{finish}"
+  xit "retrieves route from two locations", :vcr do
+    start = "Houston, TX"
+    finish = "Denver, CO"
+    # post "http://www.mapquestapi.com/directions/v2/route&from=#{start}&to=#{finish}"
 
-      expect(response).to be_successful
+    details = {
+        "email": "tester@test.com",
+        "password": "password",
+        "password_confirmation": "password"
+    }
+    post("/api/v1/users", headers: {"Content_Type": "application/json", "Accept": "application/json"}, params: details.to_json)
+    @new_key = User.last.api_key
 
-      formatted = JSON.parse(response.body, symbolize_names: true)
-        binding.pry 
-      expect(formatted).to be_a(Hash)
-      expect(formatted[:data].count).to eq(3)
-      expect(formatted[:data]).to be_a(Hash)
+    ##
+    input = {
+        "email": "tester@test.com",
+        "password": "password",
+        "password_confirmation": "password"
+    }
+    post("/api/v1/users", headers: {"Content_Type": "application/json", "Accept": "application/json"}, params: input.to_json)
 
-      expect(formatted[:data]).to have_key(:id)
-      expect(formatted[:data][:id]).to eq(nil)
+      info = {
+        "email": "tester@test.com",
+        "password": "password"
+      }
 
-      expect(formatted[:data]).to have_key(:type)
-      expect(formatted[:data][:type]).to eq("forecast")
+      post("/api/v1/sessions", headers: {"Content_Type": "application/json", "Accept": "application/json"}, params: info.to_json)
+      ##
 
-      expect(formatted[:data]).to have_key(:attributes)
-      expect(formatted[:data][:attributes]).to be_a(Hash)
+    places = {
+        "origin": "Denver,CO",
+        "destination": "Pueblo,CO",
+        "api_key": @new_key
+      }
 
-      expect(formatted[:data][:attributes]).to have_key(:id)
-      expect(formatted[:data][:attributes][:id]).to eq(nil)
+    post("/api/v1/road_trip", headers: {"Content_Type": "application/json", "Accept": "application/json"}, params: places.to_json)
+      binding.pry
 
-      expect(formatted[:data][:attributes]).to have_key(:type)
-      expect(formatted[:data][:attributes][:type]).to eq("forecast")
+    formatted = JSON.parse(response.body, symbolize_names: true)
 
-      expect(formatted[:data][:attributes]).to have_key(:current_weather)
-      expect(formatted[:data][:attributes][:current_weather]).to be_an(Hash)
+    expect(response).to be_successful
+    expect(formatted).to be_a(Hash)
+    expect(formatted).to have_key(:data)
+    expect(formatted[:data]).to be_a(Hash)
 
-      now = formatted[:data][:attributes][:current_weather]
+    expect(formatted[:data]).to have_key(:id)
+    expect(formatted[:data][:id]).to eq(nil)
 
-      expect(now).to have_key(:datetime)
-      expect(now[:datetime]).to be_an(String)
-    end
-  # end
-  #
-  # context "Sad Path" do
-  #   it "returns error message if location is empty", :vcr do
-  #     city_state = nil
-  #     get "/api/v1/forecast?location=#{city_state}"
-  #
-  #     expect(response).not_to be_successful
-  #     expect(response.status).to eq(404)
-  #
-  #     formatted = JSON.parse(response.body, symbolize_names: true)
-  #     # binding.pry
-  #     expect(formatted).to be_a(Hash)
-  #     expect(formatted[:status]).to eq("not_found")
-  #     expect(formatted[:code]).to eq(404)
-  #     expect(formatted[:message]).to eq("Invalid Input")
-  #   end
-  #
-  #   it "returns error message if location is an integer", :vcr do
-  #     city_state = 12
-  #     get "/api/v1/forecast?location=#{city_state}"
-  #
-  #     expect(response).not_to be_successful
-  #     expect(response.status).to eq(404)
-  #
-  #     formatted = JSON.parse(response.body, symbolize_names: true)
-  #
-  #     expect(formatted).to be_a(Hash)
-  #     expect(formatted[:status]).to eq("not_found")
-  #     expect(formatted[:code]).to eq(404)
-  #     expect(formatted[:message]).to eq("Invalid Input")
-  #   end
-  #
-  #   it "returns error message if location is a float", :vcr do
-  #     city_state = 34.5
-  #     get "/api/v1/forecast?location=#{city_state}"
-  #
-  #     expect(response).not_to be_successful
-  #     expect(response.status).to eq(404)
-  #
-  #     formatted = JSON.parse(response.body, symbolize_names: true)
-  #
-  #     expect(formatted).to be_a(Hash)
-  #     expect(formatted[:status]).to eq("not_found")
-  #     expect(formatted[:code]).to eq(404)
-  #     expect(formatted[:message]).to eq("Invalid Input")
-  #   end
-  # end
+    expect(formatted[:data]).to have_key(:type)
+    expect(formatted[:data][:type]).to eq("roadtrip")
+
+    expect(formatted[:data]).to have_key(:attributes)
+    expect(formatted[:data][:attributes]).to be_a(Hash)
+
+    now = formatted[:data][:attributes]
+    expect(now).to have_key(:start_city)
+    expect(now[:start_city]).to be_an(String)
+
+    expect(now).to have_key(:end_city)
+    expect(now[:end_city]).to be_an(String)
+
+    expect(now).to have_key(:travel_time)
+    expect(now[:travel_time]).to be_an(String)
+
+    expect(now).to have_key(:weather_at_eta)
+    expect(now[:weather_at_eta]).to be_an(Hash)
+
+    expect(now[:weather_at_eta]).to have_key(:temperature)
+    expect(now[:weather_at_eta][:temperature]).to be_an(Float)
+
+    expect(now[:weather_at_eta]).to have_key(:conditions)
+    expect(now[:weather_at_eta][:conditions]).to be_an(String)
+  end
 end
