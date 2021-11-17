@@ -251,12 +251,12 @@ RSpec.describe Images do
     expect(pics.type).to eq("image")
     expect(pics.top_five).to be_a(Array)
     expect(pics.top_five.size).to eq(5)
-    
+
     expect(pics.top_five.first).to be_a(Hash)
-    expect(pics.top_five.first).to have_key("creator")
-    expect(pics.top_five.first).to have_key("unsplash_profile")
-    expect(pics.top_five.first).to have_key("location")
-    expect(pics.top_five.first).to have_key("pic_url")
-    expect(pics.top_five.first).to have_key("source")
+    expect(pics.top_five.first).to have_key :creator
+    expect(pics.top_five.first).to have_key :unsplash_profile
+    expect(pics.top_five.first).to have_key :location
+    expect(pics.top_five.first).to have_key :pic_url
+    expect(pics.top_five.first).to have_key :source
   end
 end
