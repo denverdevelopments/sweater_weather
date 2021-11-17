@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Openweather and Mapquest API" do
+describe "Openweather and Mapquest API forecast index" do
   context "Happy Path" do
     it "retrieves current forecast from city-state", :vcr do
       city_state = "Houston, TX"
@@ -9,7 +9,7 @@ describe "Openweather and Mapquest API" do
       expect(response).to be_successful
 
       formatted = JSON.parse(response.body, symbolize_names: true)
-      # binding.pry
+      
       expect(formatted).to be_a(Hash)
       expect(formatted[:data].count).to eq(3)
       expect(formatted[:data]).to be_a(Hash)
@@ -47,7 +47,7 @@ describe "Openweather and Mapquest API" do
       expect(now[:temperature]).to be_an(Float)
 
       expect(now).to have_key(:feels_like)
-      expect(now[:feels_like]).to be_an(Float)
+      expect(now[:feels_like]).to be_an(Integer)
 
       expect(now).to have_key(:humidity)
       expect(now[:humidity]).to be_an(Integer)

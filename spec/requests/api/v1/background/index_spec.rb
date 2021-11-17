@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Upsplash API" do
+describe "Upsplash API background index" do
   context "Happy Path" do
     it "retrieves images for city query", :vcr do
       query = "Denver, CO"
@@ -85,7 +85,7 @@ describe "Upsplash API" do
       expect(response.status).to eq(404)
 
       formatted = JSON.parse(response.body, symbolize_names: true)
-      
+
       expect(formatted).to be_a(Hash)
       expect(formatted).to have_key :errors
       expect(formatted[:errors]).to eq("No Image Found")
