@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe "RoadTrip Create" do
-  xit "retrieves route from two locations", :vcr do
-    start = "Houston, TX"
-    finish = "Denver, CO"
+  it "retrieves route from two locations", :vcr do
+    start = "Houston,TX"
+    finish = "Denver,CO"
     # post "http://www.mapquestapi.com/directions/v2/route&from=#{start}&to=#{finish}"
 
     details = {

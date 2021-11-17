@@ -10,5 +10,15 @@ RSpec.describe 'MapquestFacade' do
         expect(response).to be_a(Coordinates)
       end
     end
+
+    describe '::get_route' do
+      it 'returns a route hash', :vcr do
+        start = "Houston,TX"
+        finish = "Denver,CO"
+        response = MapquestFacade.get_route(start, finish)
+          binding.pry
+        expect(response).to be_a(Hash)
+      end
+    end
   end
 end
