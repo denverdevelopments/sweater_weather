@@ -10,7 +10,7 @@ describe "Openweather and Mapquest API" do
       expect(response).to be_successful
 
       formatted = JSON.parse(response.body, symbolize_names: true)
-      binding.pry
+      # binding.pry
       expect(formatted).to be_a(Hash)
       expect(formatted[:data].count).to eq(3)
       expect(formatted[:data]).to be_a(Hash)
@@ -44,8 +44,8 @@ describe "Openweather and Mapquest API" do
       expect(now).to have_key(:sunset)
       expect(now[:sunset]).to be_an(String)
 
-      expect(now).to have_key(:temperature)
-      expect(now[:temperature]).to be_an(Float)
+      expect(now).to have_key(:temp)
+      expect(now[:temp]).to be_an(Float)
 
       expect(now).to have_key(:feels_like)
       expect(now[:feels_like]).to be_an(Float)
@@ -54,7 +54,7 @@ describe "Openweather and Mapquest API" do
       expect(now[:humidity]).to be_an(Integer)
 
       expect(now).to have_key(:uvi)
-      expect(now[:uvi]).to be_an(Float)
+      expect(now[:uvi]).to be_an(Integer || Float)
 
       expect(now).to have_key(:visibility)
       expect(now[:visibility]).to be_an(Integer)
@@ -153,7 +153,6 @@ describe "Openweather and Mapquest API" do
       expect(response).to be_successful
 
       formatted = JSON.parse(response.body, symbolize_names: true)
-      binding.binding.pry 
       expect(formatted).to be_a(Hash)
       expect(formatted[:data].count).to eq(3)
       expect(formatted[:data]).to be_a(Hash)
@@ -185,8 +184,8 @@ describe "Openweather and Mapquest API" do
       expect(hours.first).to have_key(:time)
       expect(hours.first[:time]).to be_an(String)
 
-      expect(hours.first).to have_key(:temp)
-      expect(hours.first[:temp]).to be_an(Float)
+      expect(hours.first).to have_key(:temperature)
+      expect(hours.first[:temperature]).to be_an(Float)
 
       expect(hours.first).to have_key(:conditions)
       expect(hours.first[:conditions]).to be_an(String)
