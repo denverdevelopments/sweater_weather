@@ -8,4 +8,6 @@ Rails.application.routes.draw do
       resources :users, only: [:index]
     end
   end
+
+  #Redirect URI (optional for 'Public' permissions) urn:ietf:wg:oauth:2.0:oob
 end
